@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dc="http://www.lh.com/schema/myns"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                http://www.springframework.org/schema/beans/spring-beans.xsd
+                                http://www.lh.com/schema/myns
+                                http://www.lh.com/schema/myns.xsd">
+
+    <dc:app type="client" name="dc-client-1" />
+
+    <dc:table local="testTableA" remote="testTableRemoteA">
+        <dc:column local="testColumnA" remote="testColumnARemote" key="true" groupType="sum" group="g1" type="int(11)" />
+        <dc:column local="testColumnB" remote="testColumnBRemote" key="true" groupType="sum" group="g1" type="int(11)" />
+    </dc:table>
+    <dc:table local="testTableB" remote="testTableRemoteB">
+        <dc:column local="testColumnA" remote="testColumnARemote" key="true" groupType="sum" group="g1" type="int(11)" />
+        <dc:column local="testColumnB" remote="testColumnBRemote" key="true" groupType="sum" group="g1" type="int(11)" />
+    </dc:table>
+
+</beans>

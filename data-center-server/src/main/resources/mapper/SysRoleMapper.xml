@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dryork.mapper.SysRoleMapper">
+
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dryork.entity.SysRole">
+        <id column="id" property="id" />
+        <result column="value" property="value" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!--  account, weibo join  -->
+    <resultMap id="roleWithPermissionList" type="com.dryork.entity.SysRole">
+        <id column="id" property="id" />
+        <result column="value" property="value" />
+        <result column="state" property="state" />
+        <collection column="id" property="sysPermissionList" javaType="java.util.ArrayList" ofType="com.dryork.entity.SysPermission" select="com.dryork.mapper.SysRolePermissionMapper.listPermissionByRId" />
+    </resultMap>
+
+
+    <insert id="insertRole" parameterType="com.dryork.entity.SysRole">
+        INSERT INTO sys_role(`value`, state) VALUES(#{value}, #{state})
+    </insert>
+
+    <delete id="deleteRole" parameterType="java.lang.String">
+        DELETE FROM sys_role WHERE `value`=#{ve}
+    </delete>
+
+    <select id="listPage" resultMap="roleWithPermissionList">
+        SELECT * FROM sys_role
+    </select>
+
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT * FROM sys_role
+    </select>
+
+    <select id="countRole" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM sys_role
+    </select>
+
+
+    <select id="getRoleByValue" parameterType="java.lang.String" resultType="com.dryork.entity.SysRole">
+        SELECT * FROM sys_role WHERE `value`=#{ve} LIMIT 1
+    </select>
+
+    <select id="getRoleById" parameterType="java.lang.Integer" resultType="com.dryork.entity.SysRole">
+        SELECT * FROM sys_role WHERE id=#{id}
+    </select>
+</mapper>

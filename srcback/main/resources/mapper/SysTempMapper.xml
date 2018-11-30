@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dryork.mapper.SysTempMapper">
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dryork.entity.SysTemp">
+        <id column="id" property="id" />
+        <result column="vkey" property="vkey" />
+        <result column="data" property="data" />
+        <result column="remark" property="remark" />
+        <result column="type" property="type" />
+        <result column="domain" property="domain" />
+    </resultMap>
+
+    <select id="listDistinctDomains" resultType="java.lang.String">
+        select distinct (domain) from sys_temp
+    </select>
+
+</mapper>

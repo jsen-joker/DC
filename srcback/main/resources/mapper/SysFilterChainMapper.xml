@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dryork.mapper.SysFilterChainMapper">
+
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dryork.entity.SysFilterChain">
+        <id column="id" property="id" />
+        <result column="url" property="url" />
+        <result column="filters" property="filters" />
+        <result column="sort" property="sort" />
+    </resultMap>
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT * FROM sys_filter_chain ORDER BY sort ASC
+    </select>
+
+    <insert id="insertFilter" parameterType="com.dryork.entity.SysFilterChain">
+        INSERT INTO sys_filter_chain(url, filters, sort) VALUES(#{url}, #{filters}, #{sort})
+    </insert>
+
+    <delete id="deleteByUrl" parameterType="java.lang.String">
+        DELETE FROM sys_filter_chain WHERE url=#{url}
+    </delete>
+
+    <select id="getFilterByUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM sys_filter_chain WHERE url=#{url} LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dc="https://raw.githubusercontent.com/jsen-joker/data-center/master"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                http://www.springframework.org/schema/beans/spring-beans.xsd
+                                https://raw.githubusercontent.com/jsen-joker/data-center/master
+                                https://raw.githubusercontent.com/jsen-joker/data-center/master/dc.xsd">
+
+    <dc:app type="client" name="testClient1" />
+
+    <dc:table local="table0" remote="tableCombine">
+        <dc:column local="id" remote="id" key="false" groupType="replace" group="g1" type="int(11)" />
+        <dc:column local="name" remote="name" key="true" groupType="replace" group="g1" type="varchar(256)" />
+    </dc:table>
+</beans>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+        xmlns="https://raw.githubusercontent.com/jsen-joker/data-center/master"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        targetNamespace="https://raw.githubusercontent.com/jsen-joker/data-center/master"
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified" >
+    <xsd:import namespace="http://www.springframework.org/schema/beans" />
+
+    <xsd:element name="app">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ App name. ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="type" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ App type eg. client,server. not used yet. ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="table">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[ Define a table mapper. ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element name="column">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[ Define a column mapper. ]]></xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:attribute name="local" type="xsd:string" use="required">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ The column name in client table. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="remote" type="xsd:string" use="required">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ The column name in datacenter table. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="key" type="xsd:boolean" use="optional" default="false">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ If this column use as a business key. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="groupType" type="xsd:string" use="required">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ When record be inserted, the replace rule, eg. replace, ignore, sum. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="group" type="xsd:string" use="optional" default="g1">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ The column belong, not used yet. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="type" type="xsd:string" use="required">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ The column type in mysql eg. int(11). ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="fk" type="xsd:boolean" use="optional" default="false">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ If the column is a foreign key. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="fkTable" type="xsd:string" use="optional" default="null">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ The foreign table in client. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="fkColumn" type="xsd:string" use="optional" default="null">
+                            <xsd:annotation>
+                                <xsd:documentation><![CDATA[ If foreign column in client. ]]></xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="local" type="xsd:string" use="required" >
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ The table name in client database. ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+
+            <xsd:attribute name="remote" type="xsd:string" use="required" >
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ The table name in datacenter database. ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
